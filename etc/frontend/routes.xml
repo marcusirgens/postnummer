@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="marcuspi_postnummer" frontName="postnummer">
+            <module name="Marcuspi_Postnummer" />
+        </route>
+    </router>
+</config>

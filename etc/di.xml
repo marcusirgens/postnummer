@@ -1,3 +1,10 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Marcuspi\Postnummer\Api\Data\PostnumberRepositoryInterface"
+                type="Marcuspi\Postnummer\Model\Postnumber\PostnumberRepository"/>
+    <preference for="Marcuspi\Postnummer\Api\Data\PostnumberInterface"
+                type="Marcuspi\Postnummer\Model\Postnumber"/>
+
 </config>

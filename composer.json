@@ -1,0 +1,38 @@
+{
+  "name": "marcuspi/module-postnummer",
+  "description": "Norwegian Post Number module for Magento 2",
+  "type": "magento2-module",
+  "license": [
+    "MIT"
+  ],
+  "authors": [
+    {
+      "name": "Marcus Pettersen Irgens",
+      "email": "marcus.pettersen.irgens@gmail.com"
+    }
+  ],
+  "require": {
+    "illuminate/support": "^5.3",
+    "magento/framework": "^101",
+    "psr/log": "^1",
+    "ext-sqlite3": "*",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "exclude-from-classmap": ["/Test/"],
+    "psr-4": {
+      "Marcuspi\\Postnummer\\": ""
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Marcuspi\\Postnummer\\Tests\\": "/Tests/"
+    }
+  }
+}
