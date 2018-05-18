@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/6.2/phpunit.xsd"
+         colors="true"
+         bootstrap="Test/bootstrap.php">
+    <testsuite name="Navimage Unit Tests">
+        <directory suffix="Test.php">Test/Unit</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./Api</directory>
+            <directory suffix=".php">./Block</directory>
+            <directory suffix=".php">./Controller</directory>
+            <directory suffix=".php">./Exception</directory>
+            <directory suffix=".php">./Export</directory>
+            <directory suffix=".php">./File</directory>
+            <directory suffix=".php">./Helper</directory>
+            <directory suffix=".php">./Import</directory>
+            <directory suffix=".php">./Logger</directory>
+            <directory suffix=".php">./Model</directory>
+            <directory suffix=".php">./Observer</directory>
+            <directory suffix=".php">./Setup</directory>
+        </whitelist>
+    </filter>
+    <listeners>
+        <listener class="Magento\Framework\TestFramework\Unit\Listener\ReplaceObjectManager"/>
+    </listeners>
+    <logging>
+        <log type="coverage-html" target="./logs/test-coverage.html" showUncoveredFiles="false"/>
+    </logging>
+</phpunit>
