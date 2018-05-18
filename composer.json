@@ -15,7 +15,6 @@
     "illuminate/support": "^5.3",
     "magento/framework": "^101",
     "psr/log": "^1",
-    "ext-sqlite3": "*",
     "ext-mbstring": "*"
   },
   "require-dev": {
