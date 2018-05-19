@@ -1,0 +1,86 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Date: 12/05/2018
+ * Time: 17:59
+ *
+ * @author Marcus Pettersen Irgens <marcus@trollweb.no>
+ */
+
+namespace Marcuspi\Postnummer\Model;
+
+use PHPUnit\Framework\TestCase;
+
+class PostnumberTest extends TestCase
+{
+    public function testConstructor()
+    {
+        $object = new Postnumber("5146", "FYLLINGSDALEN", Postnumber::TYPE_STREET, "BERGEN", "1201");
+
+        $this->assertEquals("5146", $object->getNumber());
+        $this->assertEquals("BERGEN", $object->getMunicipality());
+        $this->assertEquals("1201", $object->getMunicipalityNumber());
+        $this->assertEquals("G", $object->getStringType());
+        $this->assertEquals(Postnumber::TYPE_STREET, $object->getType());
+        $this->assertTrue(is_string($object->getTypeExplained()));
+        $this->assertEquals("FYLLINGSDALEN", $object->getArea());
+    }
+
+    public function testOtherTypes()
+    {
+        $postbox = new Postnumber("0001", "OSLO", Postnumber::TYPE_POSTBOX, "OSLO", "0301");
+        $service = new Postnumber("0040", "OSLO", Postnumber::TYPE_SERVICE, "OSLO", "0301");
+        $combined = new Postnumber("0037", "OSLO", Postnumber::TYPE_COMBINED, "OSLO", "0301");
+        $multiple = new Postnumber("0002", "NOTAPLACE", Postnumber::TYPE_MULTIPLE, "SOMEWHERE", "0301");
+
+        $this->assertEquals(Postnumber::TYPE_POSTBOX, $postbox->getType());
+        $this->assertEquals("P", $postbox->getStringType());
+        $this->assertTrue(is_string($postbox->getTypeExplained()));
+
+        $this->assertEquals(Postnumber::TYPE_SERVICE, $service->getType());
+        $this->assertEquals("S", $service->getStringType());
+        $this->assertTrue(is_string($service->getTypeExplained()));
+
+        $this->assertEquals(Postnumber::TYPE_COMBINED, $combined->getType());
+        $this->assertEquals("B", $combined->getStringType());
+        $this->assertTrue(is_string($combined->getTypeExplained()));
+
+        $this->assertEquals(Postnumber::TYPE_MULTIPLE, $multiple->getType());
+        $this->assertEquals("F", $multiple->getStringType());
+        $this->assertTrue(is_string($multiple->getTypeExplained()));
+    }
+
+    public function testTypeThrowsException()
+    {
+        $this->expectException(\Exception::class);
+        $number = new Postnumber("0002", "NOTAPLACE", 9000, "SOMEWHERE", "0301");
+        $type = $number->getType();
+    }
+
+    public function testStringTypeThrowsException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessageRegExp("/^Invalid type for post number [0-9]+$/i");
+        $number = new Postnumber("0002", "NOTAPLACE", 9000, "SOMEWHERE", "0301");
+        $type = $number->getStringType();
+    }
+
+    public function testExceptionIsCatchable()
+    {
+        $number = new Postnumber("0002", "NOTAPLACE", 9000, "SOMEWHERE", "0301");
+        try {
+            $type = $number->getTypeExplained();
+        } catch (\Exception $e) {
+            $this->assertInstanceOf("Exception", $e);
+        }
+    }
+
+    public function testTypeExplainedThrowsException()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessageRegExp("/^Invalid type for post number [0-9]+$/i");
+        $number = new Postnumber("0002", "NOTAPLACE", 9000, "SOMEWHERE", "0301");
+        $type = $number->getTypeExplained();
+    }
+
+}

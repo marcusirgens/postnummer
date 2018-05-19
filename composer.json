@@ -26,7 +26,7 @@
     ],
     "exclude-from-classmap": ["/Test/"],
     "psr-4": {
-      "Marcuspi\\Postnummer\\": ""
+      "Marcuspi\\Postnummer\\Test\\": "Test/Unit"
     }
   },
   "autoload-dev": {

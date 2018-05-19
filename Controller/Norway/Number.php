@@ -31,10 +31,12 @@ class Number extends \Magento\Framework\App\Action\Action
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        PostnumberRepositoryInterface $postnumberRepository
+        PostnumberRepositoryInterface $postnumberRepository,
+        ResultFactory $resultFactory
     ) {
         parent::__construct($context);
         $this->postnumberRepository = $postnumberRepository;
+        $this->resultFactory = $resultFactory;
     }
 
     /**

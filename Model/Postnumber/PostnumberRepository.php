@@ -52,12 +52,12 @@ class PostnumberRepository implements PostnumberRepositoryInterface
     public function get(int $number): PostnumberInterface
     {
         foreach ($this->database as $item) {
-            if ($item[0] == str_pad($number, 4, "0", STR_PAD_LEFT)) {
+            if ($item["number"] == str_pad($number, 4, "0", STR_PAD_LEFT)) {
                 $creation = $this->creationFactory->create();
 
                 $type = null;
 
-                switch ($item[4]) {
+                switch ($item["type"]) {
                     case "B":
                         $type = PostnumberInterface::TYPE_COMBINED;
                         break;
@@ -75,10 +75,10 @@ class PostnumberRepository implements PostnumberRepositoryInterface
                         break;
                 }
 
-                $creation->setNumber($item[0])
-                    ->setArea($item[1])
-                    ->setMunicipalityNumber($item[2])
-                    ->setMunicipality($item[3])
+                $creation->setNumber($item["number"])
+                    ->setArea($item["area"])
+                    ->setMunicipalityNumber($item["municipalityNum"])
+                    ->setMunicipality($item["municipality"])
                     ->setType($type);
                 return $creation->create();
             }

@@ -12,6 +12,10 @@ namespace Marcuspi\Postnummer\Model\Postnumber;
 use Countable;
 use Iterator;
 
+/**
+ * Class Database
+ * @package Marcuspi\Postnummer\Model\Postnumber
+ */
 class Database implements Iterator, Countable
 {
     const POSTNUMBER_FILE = "Data/postnummerregister-ansi.txt";
@@ -39,11 +43,21 @@ class Database implements Iterator, Countable
         return boolval(preg_match(self::LINE_EXPRESSION, $line));
     }
 
+    /**
+     * @param string $line
+     * @return array
+     */
     private function getLineContents(string $line): array
     {
         preg_match(self::LINE_EXPRESSION, $line, $matches);
 
-        return array_slice($matches, 1);
+        return [
+            "number" => $matches[1],
+            "area" => $matches[2],
+            "municipalityNum" => $matches[3],
+            "municipality" => $matches[4],
+            "type" => $matches[5],
+        ];
     }
 
     /**

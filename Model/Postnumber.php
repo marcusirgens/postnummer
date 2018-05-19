@@ -9,6 +9,7 @@
 
 namespace Marcuspi\Postnummer\Model;
 
+use Exception;
 use Marcuspi\Postnummer\Api\Data\PostnumberInterface;
 
 class Postnumber implements PostnumberInterface
@@ -78,6 +79,16 @@ class Postnumber implements PostnumberInterface
      */
     public function getType(): int
     {
+        if (!in_array($this->type, [
+            self::TYPE_COMBINED,
+            self::TYPE_MULTIPLE,
+            self::TYPE_STREET,
+            self::TYPE_SERVICE,
+            self::TYPE_POSTBOX
+        ])) {
+            throw new Exception("Invalid type for post number {$this->getNumber()}");
+        }
+
         return $this->type;
     }
 
@@ -86,7 +97,7 @@ class Postnumber implements PostnumberInterface
      */
     public function getStringType(): string
     {
-        switch ($this->getType()) {
+        switch ($this->type) {
             case self::TYPE_COMBINED:
                 return "B";
             case self::TYPE_MULTIPLE:
@@ -97,15 +108,19 @@ class Postnumber implements PostnumberInterface
                 return "P";
             case self::TYPE_SERVICE:
                 return "S";
+            default:
+                throw new Exception("Invalid type for post number {$this->getNumber()}");
+                break;
         }
     }
 
     /**
      * {@inheritdoc}
+     * @throws Exception
      */
     public function getTypeExplained(): string
     {
-        switch ($this->getType()) {
+        switch ($this->type) {
             case self::TYPE_COMBINED:
                 return "Both street addresses and post boxes";
             case self::TYPE_MULTIPLE:
@@ -116,6 +131,9 @@ class Postnumber implements PostnumberInterface
                 return "Post boxes";
             case self::TYPE_SERVICE:
                 return "Service post number (these numbers are not used for post addresses)";
+            default:
+                throw new Exception("Invalid type for post number {$this->getNumber()}");
+                break;
         }
     }
 

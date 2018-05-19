@@ -107,8 +107,7 @@ class PostnumberCreation implements PostnumberCreationInterface
     public function create(): PostnumberInterface
     {
         if (!$this->validate()) {
-            var_dump($this);
-            //throw new \Exception("Missing data for instantiation");
+            throw new \Exception("Missing data for instantiation");
         }
 
         return $this->postnumberFactory->create([
