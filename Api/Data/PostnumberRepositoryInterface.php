@@ -26,4 +26,13 @@ interface PostnumberRepositoryInterface
      * @return PostnumberInterface
      */
     public function get(int $number): PostnumberInterface;
+
+
+    /**
+     * Finds post numbers for a place
+     *
+     * @param string $place
+     * @return \Generator<PostnumberInterface>
+     */
+    public function getArea(string $place);
 }

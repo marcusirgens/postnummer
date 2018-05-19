@@ -1,2 +1,3 @@
 logs
 *.xml.disabled
+.DS_Store

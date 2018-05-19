@@ -65,4 +65,9 @@ interface PostnumberInterface
      * @return string
      */
     public function getTypeExplained(): string;
+
+    /**
+     * @return array
+     */
+    public function toArray(): array;
 }

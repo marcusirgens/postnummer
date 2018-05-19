@@ -15,7 +15,7 @@ use Marcuspi\Postnummer\Api\Data\PostnumberRepositoryInterface;
  * @see \Trollweb\Navimage\Controller\Creditmemo\ListAction\Interceptor
  * @package Marcuspi\Postnummer
  */
-class Number extends \Magento\Framework\App\Action\Action
+class Area extends \Magento\Framework\App\Action\Action
 {
 
     /**
@@ -48,50 +48,44 @@ class Number extends \Magento\Framework\App\Action\Action
         $response = $this->resultFactory->create(ResultFactory::TYPE_JSON);
 
 
-        // the first one that's a number
-        $code = (new \Illuminate\Support\Collection($this->getRequest()->getParams()))
+        // the first one that's a string
+        $area = (new \Illuminate\Support\Collection($this->getRequest()->getParams()))
             ->keys()
             ->filter(function ($value) {
-                return preg_match("/^[0-9]{4}$/", $value);
-            })
-            ->map(function($value){
-                return intval($value);
+                return preg_match("/^[a-zøæåÆØÅ\-\ ]+$/i", $value);
             })
             ->first();
 
-        if (is_null($code)) {
+        if (is_null($area)) {
             return $this->resultFactory
                 ->create(ResultFactory::TYPE_JSON)
                 ->setHttpResponseCode(400)
                 ->setData([
                     "status" => "error",
-                    "message" => "Please provide a valid post number (4 numbers, 0-prefixed)"
+                    "message" => "Please provide a valid post area (a-zæøå, case insensitive)"
                 ]);
         }
 
-        try {
-            $num = $this->postnumberRepository->get($code);
-        } catch (NoSuchEntityException $e) {
+        $num = collect($this->postnumberRepository->getArea($area));
+        if(count($num) == 0) {
             return $this->resultFactory
                 ->create(ResultFactory::TYPE_JSON)
                 ->setHttpResponseCode(404)
                 ->setData([
                     "status" => "error",
-                    "message" => "That post number could not be found",
-                    "detailed" => $e->getMessage()
+                    "message" => "That post area could not be found",
                 ]);
         }
         $response->setData([
             "status" => "OK",
             "data" => [
-                $num->getNumber() => [
-                    "number" => $num->getNumber(),
-                    "area" => $num->getArea(),
-                    "municipality" => $num->getMunicipality(),
-                    "municipalityNumber" => $num->getMunicipalityNumber(),
-                    "type" => $num->getStringType(),
-                    "typeExplanation" => $num->getTypeExplained()
-                ]
+                $num
+                    ->mapWithKeys(function ($postnumber) {
+                        return [
+                            $postnumber->getNumber() => collect($postnumber->toArray())
+                        ];
+                    })
+                    ->toArray()
             ]
         ]);
 

@@ -43,6 +43,24 @@ class PostnumberRepository implements PostnumberRepositoryInterface
         $this->creationFactory = $creationFactory;
     }
 
+    private function typeCast(string $type): int
+    {
+        switch ($type) {
+            case "B":
+                return PostnumberInterface::TYPE_COMBINED;
+            case "F":
+                return PostnumberInterface::TYPE_MULTIPLE;
+            case "G":
+                return PostnumberInterface::TYPE_STREET;
+            case "P":
+                return PostnumberInterface::TYPE_POSTBOX;
+            case "S":
+                return PostnumberInterface::TYPE_SERVICE;
+            default:
+                throw new \Exception("Invalid post number type {$type}");
+        }
+    }
+
     /**
      * @param int $number
      * @return PostnumberInterface
@@ -55,35 +73,38 @@ class PostnumberRepository implements PostnumberRepositoryInterface
             if ($item["number"] == str_pad($number, 4, "0", STR_PAD_LEFT)) {
                 $creation = $this->creationFactory->create();
 
-                $type = null;
-
-                switch ($item["type"]) {
-                    case "B":
-                        $type = PostnumberInterface::TYPE_COMBINED;
-                        break;
-                    case "F":
-                        $type = PostnumberInterface::TYPE_MULTIPLE;
-                        break;
-                    case "G":
-                        $type = PostnumberInterface::TYPE_STREET;
-                        break;
-                    case "P":
-                        $type = PostnumberInterface::TYPE_POSTBOX;
-                        break;
-                    case "S":
-                        $type = PostnumberInterface::TYPE_SERVICE;
-                        break;
-                }
-
                 $creation->setNumber($item["number"])
                     ->setArea($item["area"])
                     ->setMunicipalityNumber($item["municipalityNum"])
                     ->setMunicipality($item["municipality"])
-                    ->setType($type);
+                    ->setType($this->typeCast($item["type"]));
                 return $creation->create();
             }
         }
 
         throw NoSuchEntityException::singleField("postnumber", $number);
+    }
+
+    /**
+     * Finds post numbers for a place
+     *
+     * @param string $place
+     * @return \Generator<PostnumberInterface>
+     * @throws \Exception If the data in the db file is corrupt or unsupported.
+     */
+    public function getArea(string $place)
+    {
+        foreach ($this->database as $item) {
+            if (mb_strtolower($item["area"]) == mb_strtolower(trim($place))) {
+                $creation = $this->creationFactory->create();
+
+                $creation->setNumber($item["number"])
+                    ->setArea($item["area"])
+                    ->setMunicipalityNumber($item["municipalityNum"])
+                    ->setMunicipality($item["municipality"])
+                    ->setType($this->typeCast($item["type"]));
+                yield $creation->create();
+            }
+        }
     }
 }

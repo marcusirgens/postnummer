@@ -83,4 +83,14 @@ class PostnumberTest extends TestCase
         $type = $number->getTypeExplained();
     }
 
+    public function testCanReturnArray()
+    {
+        $object = new Postnumber("5146", "FYLLINGSDALEN", Postnumber::TYPE_STREET, "BERGEN", "1201");
+        $this->assertArrayHasKey("number", $object->toArray());
+        $this->assertArrayHasKey("area", $object->toArray());
+        $this->assertArrayHasKey("type", $object->toArray());
+        $this->assertArrayHasKey("municipality", $object->toArray());
+        $this->assertArrayHasKey("municipalityNumber", $object->toArray());
+    }
+
 }

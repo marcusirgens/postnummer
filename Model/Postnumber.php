@@ -152,4 +152,19 @@ class Postnumber implements PostnumberInterface
     {
         return str_pad($this->municipalityNum, 4, "0", STR_PAD_LEFT);
     }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            "number" => $this->getNumber(),
+            "area" => $this->getArea(),
+            "type" => $this->getStringType(),
+            "typeExplained" => $this->getTypeExplained(),
+            "municipality" => $this->getMunicipality(),
+            "municipalityNumber" => $this->getMunicipalityNumber()
+        ];
+    }
 }
