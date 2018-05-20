@@ -1,4 +1,26 @@
 <?php
+/**
+ * This file is part of marcuspi/module-postnummer.
+ *
+ * Postnummer is a Magento 2 module that facilitates post number searches.
+ * Copyright (C) 2018 Marcus Pettersen Irgens
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * @author Marcus Pettersen Irgens <marcus.pettersen.irgens@gmail.com>
+ * @copyright 2018 Marcus Pettersen Irgens
+ * @license GPL-3.0-or-later GNU General Public License version 3
+ */
 
 namespace Marcuspi\Postnummer\Controller\Norway;
 
@@ -8,11 +30,11 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Marcuspi\Postnummer\Api\Data\PostnumberRepositoryInterface;
 
 /**
- * View controller for the navimage/creditmemo/list endpoint
+ * View controller for the /postnummer/norway/nummer/[0-9]{4}
  *
  * Simply lists all the creditmemos that have not been picked up by the ERP supplier.
  *
- * @see \Trollweb\Navimage\Controller\Creditmemo\ListAction\Interceptor
+ * @see \Marcuspi\Postnummer\Controller\Area\Interceptor
  * @package Marcuspi\Postnummer
  */
 class Number extends \Magento\Framework\App\Action\Action

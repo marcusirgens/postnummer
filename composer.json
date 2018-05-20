@@ -3,7 +3,7 @@
   "description": "Norwegian Post Number module for Magento 2",
   "type": "magento2-module",
   "license": [
-    "MIT"
+    "GPL-3.0-or-later"
   ],
   "authors": [
     {
