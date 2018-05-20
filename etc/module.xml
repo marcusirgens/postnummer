@@ -19,7 +19,7 @@
   -->
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Marcuspi_Postnummer" setup_version="0.2.0">
+    <module name="Marcuspi_Postnummer" setup_version="0.2.1">
         <sequence>
         </sequence>
     </module>
