@@ -21,7 +21,7 @@ use Marcuspi\Postnummer\Api\Data\PostnumberRepositoryInterface;
  *
  * Simply lists all the creditmemos that have not been picked up by the ERP supplier.
  *
- * @see \Marcuspi\Postnummer\Controller\Area\Interceptor
+ * @see \Marcuspi\Postnummer\Controller\Norway\Area\Interceptor
  * @package Marcuspi\Postnummer
  */
 class Area extends \Magento\Framework\App\Action\Action
@@ -60,6 +60,10 @@ class Area extends \Magento\Framework\App\Action\Action
         // the first one that's a string
         $area = (new \Illuminate\Support\Collection($this->getRequest()->getParams()))
             ->keys()
+            ->map(function($value){
+                $value = strval($value);
+                return urldecode($value);
+            })
             ->filter(function ($value) {
                 return preg_match("/^[a-zøæåÆØÅ\-\ ]+$/i", $value);
             })
@@ -71,7 +75,7 @@ class Area extends \Magento\Framework\App\Action\Action
                 ->setHttpResponseCode(400)
                 ->setData([
                     "status" => "error",
-                    "message" => "Please provide a valid post area (a-zæøå, case insensitive)"
+                    "message" => "Please provide a valid post area (a-z, æøå, spaces allowed, case insensitive)"
                 ]);
         }
 

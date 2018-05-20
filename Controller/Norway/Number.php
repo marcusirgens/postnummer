@@ -21,7 +21,7 @@ use Marcuspi\Postnummer\Api\Data\PostnumberRepositoryInterface;
  *
  * Simply lists all the creditmemos that have not been picked up by the ERP supplier.
  *
- * @see \Marcuspi\Postnummer\Controller\Area\Interceptor
+ * @see \Marcuspi\Postnummer\Controller\Norway\Number\Interceptor
  * @package Marcuspi\Postnummer
  */
 class Number extends \Magento\Framework\App\Action\Action
