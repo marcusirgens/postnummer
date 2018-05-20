@@ -46,6 +46,6 @@
         <listener class="Magento\Framework\TestFramework\Unit\Listener\ReplaceObjectManager"/>
     </listeners>
     <logging>
-        <log type="coverage-html" target="./logs/test-coverage.html" showUncoveredFiles="false"/>
+        <log type="coverage-html" target="./logs/test-coverage" showUncoveredFiles="false"/>
     </logging>
 </phpunit>

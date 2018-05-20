@@ -43,11 +43,11 @@ class PostnumberRepository implements PostnumberRepositoryInterface
      * PostnumberRepository constructor.
      *
      * @param Database $database
-     * @param PostNumberCreationFactory $creationFactory
+     * @param PostnumberCreationFactory $creationFactory
      */
     public function __construct(
         Database $database,
-        PostNumberCreationFactory $creationFactory
+        PostnumberCreationFactory $creationFactory
     ) {
         $this->database = $database;
         $this->creationFactory = $creationFactory;

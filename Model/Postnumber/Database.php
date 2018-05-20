@@ -29,7 +29,7 @@ use Iterator;
 class Database implements Iterator, Countable
 {
     const POSTNUMBER_FILE = "Data/postnummerregister-ansi.txt";
-    const LINE_EXPRESSION = '/^\s*(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s*$/i';
+    const LINE_EXPRESSION = '/^([0-9]+)\s+((?:\S+)(?:\ \S+)*)\s+([0-9]+)\s+((?:\S+)(?:\ \S+)*)\s+(\S)\n?$/i';
 
     /**
      * @var \SplFileObject

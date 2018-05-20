@@ -94,5 +94,4 @@ class PostnumberTest extends TestCase
         $this->assertArrayHasKey("municipality", $object->toArray());
         $this->assertArrayHasKey("municipalityNumber", $object->toArray());
     }
-
 }
