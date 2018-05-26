@@ -21,31 +21,31 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/6.2/phpunit.xsd"
          colors="true"
-         bootstrap="Test/bootstrap.php">
+         bootstrap="tests/bootstrap.php">
     <testsuite name="Navimage Unit Tests">
-        <directory suffix="Test.php">Test/Unit</directory>
+        <directory suffix="Test.php">tests/Unit</directory>
     </testsuite>
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./Api</directory>
-            <directory suffix=".php">./Block</directory>
-            <directory suffix=".php">./Controller</directory>
-            <directory suffix=".php">./Exception</directory>
-            <directory suffix=".php">./Export</directory>
-            <directory suffix=".php">./File</directory>
-            <directory suffix=".php">./Helper</directory>
-            <directory suffix=".php">./Import</directory>
-            <directory suffix=".php">./Logger</directory>
-            <directory suffix=".php">./Model</directory>
-            <directory suffix=".php">./Observer</directory>
-            <directory suffix=".php">./Setup</directory>
+            <directory suffix=".php">./src/Api</directory>
+            <directory suffix=".php">./src/Block</directory>
+            <directory suffix=".php">./src/Controller</directory>
+            <directory suffix=".php">./src/Exception</directory>
+            <directory suffix=".php">./src/Export</directory>
+            <directory suffix=".php">./src/File</directory>
+            <directory suffix=".php">./src/Helper</directory>
+            <directory suffix=".php">./src/Import</directory>
+            <directory suffix=".php">./src/Logger</directory>
+            <directory suffix=".php">./src/Model</directory>
+            <directory suffix=".php">./src/Observer</directory>
+            <directory suffix=".php">./src/Setup</directory>
         </whitelist>
     </filter>
     <listeners>
         <listener class="Magento\Framework\TestFramework\Unit\Listener\ReplaceObjectManager"/>
     </listeners>
     <logging>
-        <log type="coverage-html" target="./logs/test-coverage" showUncoveredFiles="false"/>
+        <log type="coverage-html" target="./test-coverage" showUncoveredFiles="false"/>
     </logging>
 </phpunit>

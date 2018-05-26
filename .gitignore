@@ -1,3 +1,2 @@
-logs
+test-coverage
 *.xml.disabled
-.DS_Store
