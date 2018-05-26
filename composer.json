@@ -27,14 +27,15 @@
     "files": [
       "registration.php"
     ],
-    "exclude-from-classmap": ["/Test/"],
+    "exclude-from-classmap": ["/tests/"],
     "psr-4": {
-      "Marcuspi\\Postnummer\\Test\\": "Test/Unit"
+      "Marcuspi\\Postnummer\\": "src",
+      "Marcuspi\\Postnummer\\Test\\": "tests/Unit"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Marcuspi\\Postnummer\\Tests\\": "/Tests/"
+      "Marcuspi\\Postnummer\\Tests\\": "/tests/"
     }
   }
 }
